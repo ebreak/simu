@@ -4,7 +4,9 @@
 #include "coordinate.h"
 
 struct object {
+  universe *u;
   coordinate position;
+  object(universe *u): u(u) {}
   virtual void tick_action() = 0;
 };
 
