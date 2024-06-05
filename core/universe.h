@@ -10,6 +10,7 @@ struct object;
 #include "object.h"
 
 class universe {
+  friend struct object;
   std::vector<object*> all;
   std::set<object*> active;
   std::mutex all_lock, active_lock;
@@ -19,7 +20,7 @@ public:
   ~universe();
   void start(u64 n);
   const object *operator[](u64 id);
-  void insert(object *obj);
+  u64 insert(object *obj);
   void activate(u64 id);
   void deactivate(u64 id);
 };

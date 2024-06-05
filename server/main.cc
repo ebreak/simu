@@ -5,7 +5,8 @@
 
 int main() {
   universe u;
-  u.insert(new human(&u, coordinate(0, 0)));
+  auto id = u.insert(new human(&u, coordinate(0, 0)));
+  u.activate(id);
   u.start(-1);
   return 0;
 }

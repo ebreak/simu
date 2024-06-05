@@ -38,10 +38,12 @@ const object *universe::operator[](u64 id) {
   return ret;
 }
 
-void universe::insert(object *obj) {
+u64 universe::insert(object *obj) {
   all_lock.lock();
   all.push_back(obj);
+  u64 id = all.size()-1;
   all_lock.unlock();
+  return id;
 }
 
 void universe::activate(u64 id) {
