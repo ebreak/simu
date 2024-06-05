@@ -17,7 +17,7 @@ void universe::start(u64 n) {
   moc::clock c;
   i64 used = 0;
   while (n--) {
-    printf("\rtick: %d, CPU: %llf%%, obj: %d", tick, (double) used / 10, all.size());
+    printf("\rCPU: %llf%%, obj: %d", (double) used / 10, all.size());
 
     all_lock.lock();
     active_lock.lock();
