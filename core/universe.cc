@@ -19,6 +19,13 @@ void universe::start(u64 n) {
   while (n--) {
     printf("\rtick: %d, CPU: %llf%%, obj: %d", tick, (double) used / 10, all.size());
 
+    all_lock.lock();
+    active_lock.lock();
+    for (auto v: active)
+      v->tick_action();
+    active_lock.unlock();
+    all_lock.unlock();
+
     tick += 1;
     c.tick(1000);
   }
