@@ -18,6 +18,7 @@ public:
   ~universe();
   void start(u64 n);
   const object *operator[](u64 id);
+  void operator+=(object *obj);
   void activate(u64 id);
   void deactivate(u64 id);
 };

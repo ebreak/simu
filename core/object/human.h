@@ -4,6 +4,8 @@
 #include "object.h"
 
 struct human: public object{
+  human(universe *u): object(u) {};
+  void tick_action();
 };
 
 
