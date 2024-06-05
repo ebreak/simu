@@ -27,7 +27,7 @@ void universe::start(u64 n) {
     all_lock.unlock();
 
     tick += 1;
-    c.tick(1000);
+    c.tick(10);
   }
 }
 
