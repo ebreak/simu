@@ -8,6 +8,11 @@ universe::universe() {
   tick = 0;
 }
 
+universe::~universe() {
+  for (auto v: all)
+    delete v;
+}
+
 void universe::start(u64 n) {
   moc::clock c;
   i64 used = 0;
@@ -17,4 +22,16 @@ void universe::start(u64 n) {
     tick += 1;
     c.tick(1000);
   }
+}
+
+void universe::activate(u64 id) {
+  active_lock.lock();
+  active.insert(id);
+  active_lock.unlock();
+}
+
+void universe::deactivate(u64 id) {
+  active_lock.lock();
+  active.erase(id);
+  active_lock.unlock();
 }
