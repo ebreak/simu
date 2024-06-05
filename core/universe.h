@@ -15,7 +15,7 @@ class universe {
   std::set<object*> active;
   std::mutex all_lock, active_lock;
 public:
-  i64 tick;
+  u64 tick;
   universe();
   ~universe();
   void start(u64 n);
