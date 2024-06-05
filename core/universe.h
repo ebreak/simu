@@ -23,4 +23,8 @@ public:
   void deactivate(u64 id);
 };
 
+inline void operator+=(universe *u, object *obj) {
+  *u += obj;
+}
+
 #endif
