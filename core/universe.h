@@ -9,14 +9,15 @@
 #include "object.h"
 
 class universe {
+  std::vector<object*> all;
   std::set<object*> active;
   std::mutex all_lock, active_lock;
 public:
   i64 tick;
-  std::vector<object*> all;
   universe();
   ~universe();
   void start(u64 n);
+  const object *operator[](u64 id);
   void activate(u64 id);
   void deactivate(u64 id);
 };

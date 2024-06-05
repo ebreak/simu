@@ -24,6 +24,13 @@ void universe::start(u64 n) {
   }
 }
 
+const object *universe::operator[](u64 id) {
+  all_lock.lock();
+  const object *ret = all[id];
+  all_lock.unlock();
+  return ret;
+}
+
 void universe::activate(u64 id) {
   active_lock.lock();
   active.insert(id);
