@@ -7,6 +7,6 @@ int main() {
   universe u;
   auto id = u.insert(new human(&u, coordinate(0, 0)));
   u.activate(id);
-  u.start(-1);
+  u.start(100);
   return 0;
 }

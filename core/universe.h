@@ -18,7 +18,7 @@ public:
   u64 tick;
   universe();
   ~universe();
-  void start(u64 n);
+  void start(i64 period);
   const object *operator[](u64 id);
   u64 insert(object *obj);
   void activate(u64 id);

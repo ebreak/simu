@@ -3,8 +3,9 @@
 
 #include "object.h"
 
-struct human: public object{
-  human(universe *u, coordinate _position): object(u, _position) {};
+struct human: public object {
+  u64 last_spawn;
+  human(universe *u, coordinate _position);
   void tick_action();
 };
 
