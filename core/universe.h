@@ -10,7 +10,7 @@
 
 class universe {
   std::vector<object*> all;
-  std::set<object*> active;
+  std::set<const object*> active;
   std::mutex all_lock, active_lock;
 public:
   i64 tick;

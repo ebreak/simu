@@ -33,12 +33,12 @@ const object *universe::operator[](u64 id) {
 
 void universe::activate(u64 id) {
   active_lock.lock();
-  active.insert(id);
+  active.insert(this->operator[](id));
   active_lock.unlock();
 }
 
 void universe::deactivate(u64 id) {
   active_lock.lock();
-  active.erase(id);
+  active.erase(this->operator[](id));
   active_lock.unlock();
 }
