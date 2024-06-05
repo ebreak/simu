@@ -4,6 +4,7 @@
 #include "coordinate.h"
 
 class universe;
+#include "universe.h"
 
 struct object {
   universe *u;

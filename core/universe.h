@@ -6,6 +6,7 @@
 #include <vector>
 #include <mutex>
 
+struct object;
 #include "object.h"
 
 class universe {
