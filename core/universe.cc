@@ -38,7 +38,7 @@ const object *universe::operator[](u64 id) {
   return ret;
 }
 
-void universe::operator+=(object *obj) {
+void universe::insert(object *obj) {
   all_lock.lock();
   all.push_back(obj);
   all_lock.unlock();
@@ -46,12 +46,16 @@ void universe::operator+=(object *obj) {
 
 void universe::activate(u64 id) {
   active_lock.lock();
-  active.insert(this->operator[](id));
+  all_lock.lock();
+  active.insert(all[id]);
+  all_lock.unlock();
   active_lock.unlock();
 }
 
 void universe::deactivate(u64 id) {
   active_lock.lock();
-  active.erase(this->operator[](id));
+  all_lock.lock();
+  active.erase(all[id]);
+  all_lock.unlock();
   active_lock.unlock();
 }

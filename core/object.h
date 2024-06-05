@@ -3,10 +3,12 @@
 
 #include "coordinate.h"
 
+class universe;
+
 struct object {
   universe *u;
   coordinate position;
-  object(universe *u): u(u) {}
+  object(universe *_u, coordinate _position): u(_u), position(_position) {}
   virtual void tick_action() = 0;
 };
 
