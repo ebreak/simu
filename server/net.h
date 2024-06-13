@@ -3,6 +3,8 @@
 
 #include <pyrite/server.h>
 
+extern prt::server *s;
+
 void init_server();
 
 #endif

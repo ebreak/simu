@@ -12,6 +12,7 @@ void init_server() {
   s = new prt::server(8082);
   s->set_handler("login", _login);
   s->set_handler("get-universe", _get_universe);
+  s->set_handler("human-move", _human_move);
   s->async();
   moc::log("server init ok");
 }
