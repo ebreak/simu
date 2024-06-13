@@ -54,6 +54,7 @@ u64 universe::insert(object *obj) {
   all.push_back(obj);
   u64 id = all.size()-1;
   all_lock.unlock();
+  obj->id = id;
   return id;
 }
 
