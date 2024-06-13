@@ -12,6 +12,7 @@ struct coordinate {
   coordinate(double _x, double _y): x(_x), y(_y) {}
 #endif
   double distance_to(const coordinate &other);
+  void operator+=(const coordinate &other);
 };
 
 #endif

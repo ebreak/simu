@@ -14,3 +14,10 @@ double coordinate::distance_to(const coordinate &other) {
 #endif
   return sqrt(sum);
 }
+
+void coordinate::operator+=(const coordinate &other) {
+  this->x += other.x;
+  this->y += other.y;
+#ifdef SIMU_3D
+  this->z += other.z;
+}
