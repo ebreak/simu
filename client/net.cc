@@ -3,6 +3,8 @@
 #include <pyrite/client.h>
 #include <object/human.h>
 
+#include "game.h"
+
 prt::client *c;
 u64 session;
 
