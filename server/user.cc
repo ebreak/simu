@@ -9,6 +9,7 @@
 u64 next_session;
 std::vector<user> users;
 std::map<u64, i64> session_uid;
+std::map<i64, u64> uid_oid;
 
 void init_user() {
   users.push_back({0, "nahida", "akademiya", nullptr});
@@ -33,7 +34,10 @@ prt::bytes _login(sockaddr_in client, prt::bytes data) {
     return prt::bytes(&session, sizeof(session));
 
   session = next_session++;
-  u->insert(new human(u, coordinate()));
   session_uid[session] = uid;
+
+  if (uid_oid.count(uid))
+    return prt::bytes(&session, sizeof(session));
+  uid_oid[uid] = u->insert(new human(u, coordinate()));
   return prt::bytes(&session, sizeof(session));
 }
