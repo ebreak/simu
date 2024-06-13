@@ -16,3 +16,7 @@ void human::tick_action() {
   ));
   this->awake(id);
 }
+
+void human::move(coordinate delta) {
+  this->position += delta;
+}
