@@ -20,6 +20,7 @@ public:
   ~universe();
   void start(i64 period);
   const object *operator[](u64 id);
+  std::vector<const object*> ro_obj();
   u64 insert(object *obj);
   void activate(u64 id);
   void deactivate(u64 id);

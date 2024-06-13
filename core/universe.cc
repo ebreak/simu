@@ -39,6 +39,15 @@ const object *universe::operator[](u64 id) {
   return ret;
 }
 
+std::vector<const object*> universe::ro_obj() {
+  std::vector<const object *> ret;
+  ret.reserve(this->all.size());
+  for (int i = 0; i < this->all.size(); ++i)
+    ret.push_back(this->all[i]);
+  ret.resize(this->all.size());
+  return ret;
+}
+
 u64 universe::insert(object *obj) {
   all_lock.lock();
   all.push_back(obj);
