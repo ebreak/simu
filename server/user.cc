@@ -16,6 +16,7 @@ std::map<i64, sockaddr_in> uid_addr;
 
 void init_user() {
   users.push_back({0, "nahida", "akademiya"});
+  users.push_back({1, "ayaka", "kamisato"});
   moc::log("user init ok");
 }
 

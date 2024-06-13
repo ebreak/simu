@@ -10,14 +10,14 @@ u64 session;
 
 prt::bytes _human_move(prt::bytes data);
 
-void init_client() {
+void init_client(std::string username, std::string password) {
   c = new prt::client("127.0.0.1", 8082);
   c->set_handler("human-move", _human_move);
   c->async();
 
   prt::bytes login_data;
-  login_data += std::string("nahida");
-  login_data += std::string("akademiya");
+  login_data += username;
+  login_data += password;
   auto resp = c->promise("login", login_data);
   resp.to_mem(&session, sizeof(session));
   if (session == -1)

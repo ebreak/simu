@@ -10,8 +10,8 @@
 #include "net.h"
 #include "game.h"
 
-int main() {
-  init_client();
+int main(int argc, char **argv) {
+  init_client(std::string(argv[1]), std::string(argv[2]));
   std::thread t(start);
   ui_mainloop();
   return 0;
