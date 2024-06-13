@@ -7,14 +7,17 @@
 #include <mocutils/clock.h>
 
 void render(universe *u) {
+  if (!glfwInit()) exit(-1);
+  GLFWwindow *window = glfwCreateWindow(1024, 1024, "SIMU", NULL, NULL);
+  glfwMakeContextCurrent(window);
   moc::clock start;
-  while (true) {
+  while (!glfwWindowShouldClose(window)) {
     auto ro_data = u->ro_obj();
-    for (auto obj: ro_data)
-      printf("rendering %d\n", obj->kind);
-    printf("rendered %d obj(s)\n", ro_data.size());
-    start.tick(1000);
+    glfwPollEvents();
+    start.tick(100);
   }
+  glfwTerminate();
+  exit(0);
 }
 
 int main() {
