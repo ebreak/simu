@@ -1,6 +1,8 @@
 #include "human.h"
 
-human::human(universe *u, coordinate _position): object(u, _position) {
+#include "kind.h"
+
+human::human(universe *u, coordinate _position): object(u, obj_human, _position) {
   last_spawn = this->u->tick;
 }
 
