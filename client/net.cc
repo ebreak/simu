@@ -21,7 +21,7 @@ void init_client() {
   resp.to_mem(&session, sizeof(session));
   if (session == -1)
     moc::panic("invalid username or password");
-  moc::logf("login success. session: %llx", session);
+  moc::logf("login success. session: %llx\n", session);
 }
 
 std::vector<human*> get_all_human() {

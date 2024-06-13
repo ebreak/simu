@@ -3,6 +3,7 @@
 
 #include <universe.h>
 #include <object/human.h>
+#include <mocutils/channel.h>
 
 void ui_mainloop();
 

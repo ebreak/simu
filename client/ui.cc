@@ -8,14 +8,14 @@
 #include "game.h"
 
 void process_key(GLFWwindow *window) {
-  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    me->move(coordinate(0, 1.0/32));
-  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    me->move(coordinate(-1.0/32, 0));
-  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    me->move(coordinate(0, -1.0/32));
-  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    me->move(coordinate(1.0/32, 0));
+  // if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+  //   me->move(coordinate(0, 1.0/32));
+  // if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+  //   me->move(coordinate(-1.0/32, 0));
+  // if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+  //   me->move(coordinate(0, -1.0/32));
+  // if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+  //   me->move(coordinate(1.0/32, 0));
 }
 
 void render(GLFWwindow *window) {
@@ -28,14 +28,16 @@ void render(GLFWwindow *window) {
 }
 
 void ui_mainloop() {
+  while (!u) ;
+
   if (!glfwInit()) exit(-1);
   GLFWwindow *window = glfwCreateWindow(1024, 1024, "SIMU", NULL, NULL);
   glfwMakeContextCurrent(window);
 
   moc::clock start;
   while (!glfwWindowShouldClose(window)) {
-    process_key(window, me);
-    render(window, u);
+    process_key(window);
+    render(window);
     glfwPollEvents();
     start.tick(10);
   }

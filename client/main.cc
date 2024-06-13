@@ -4,6 +4,7 @@
 #include <universe.h>
 #include <object/human.h>
 #include <mocutils/clock.h>
+#include <mocutils/channel.h>
 
 #include "ui.h"
 #include "net.h"
@@ -11,7 +12,7 @@
 
 int main() {
   init_client();
-  std::thread ui_thread(ui_mainloop);
-  start();
+  std::thread t(start);
+  ui_mainloop();
   return 0;
 }

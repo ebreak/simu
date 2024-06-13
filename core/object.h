@@ -23,8 +23,8 @@ struct object {
   void asleep(u64 id);
   virtual moc::bytes serialize() = 0;
 
-  static object *unserialize(moc::bytes &data) {
-    object *ret = (object *) new void[data.size()];
+  static object *unserialize(moc::bytes data) {
+    object *ret = (object *) new char[data.size()];
     data.to_mem(ret, data.size());
     return ret;
   }

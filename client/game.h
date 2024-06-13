@@ -2,6 +2,7 @@
 #define __CLIENT_GAME_H
 
 #include <universe.h>
+#include <mocutils/channel.h>
 
 extern universe *u;
 
