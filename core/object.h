@@ -7,6 +7,7 @@ class universe;
 #include "universe.h"
 
 struct object {
+  u64 id;
   i64 kind; // > 0 for renderable, <= 0 for unrenderable
   universe *u;
   coordinate position;
