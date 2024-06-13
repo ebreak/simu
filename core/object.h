@@ -22,6 +22,12 @@ struct object {
   void awake(u64 id);
   void asleep(u64 id);
   virtual moc::bytes serialize() = 0;
+
+  static object *unserialize(moc::bytes &data) {
+    object *ret = (object *) new void[data.size()];
+    data.to_mem(ret, data.size());
+    return ret;
+  }
 };
 
 #endif

@@ -8,6 +8,20 @@ universe::universe() {
   tick = 0;
 }
 
+universe::universe(moc::bytes &raw) {
+  int obj_num = raw.next_int32();
+  this->all.reserve(obj_num);
+  while (obj_num--) {
+    int obj_len = raw.next_int32();
+    this->all.push_back(object::unserialize(raw.range(raw.ptr, raw.ptr+obj_len)));
+    raw.ptr += obj_len;
+  }
+  
+  int active_num = raw.next_int32();
+  while (active_num--)
+    this->active.insert(this->all[raw.next_int32()]);
+}
+
 universe::~universe() {
   for (auto v: all)
     delete v;

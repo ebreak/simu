@@ -18,6 +18,7 @@ class universe {
 public:
   u64 tick;
   universe();
+  universe(moc::bytes &raw);
   ~universe();
   void start(i64 period, bool show_status);
   const object *operator[](u64 id);
