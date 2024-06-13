@@ -1,6 +1,5 @@
 #include "user.h"
 
-#include <telecom/login.h>
 #include <telecom/user.h>
 #include <object/human.h>
 #include <map>
@@ -17,15 +16,15 @@ void init_user() {
 }
 
 prt::bytes _login(sockaddr_in client, prt::bytes data) {
-  login login_data;
-  data.to_mem(&login_data, sizeof(login_data));
+  std::string username = data.next_string();
+  std::string password = data.next_string();
 
   i64 uid = -1;
   u64 session = -1;
   for (int i = 0; i < users.size(); ++i) {
-    if (login_data.username != users[i].username)
+    if (username != users[i].username)
       continue;
-    if (login_data.password != users[i].password)
+    if (password != users[i].password)
       continue;
     uid = i;
     break;
