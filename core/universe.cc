@@ -73,3 +73,23 @@ void universe::deactivate(u64 id) {
   all_lock.unlock();
   active_lock.unlock();
 }
+
+moc::bytes universe::serialize() {
+  moc::bytes ret;
+  all_lock.lock();
+  active_lock.lock();
+  // serialize 'all'
+  ret += (i32) all.size();
+  for (auto obj: all) {
+    auto serial = obj->serialize();
+    ret += (i32) serial.size();
+    ret += serial;
+  }
+  // serialize 'active'
+  ret += (i32) active.size();
+  for (auto obj: active)
+    ret += (i32) obj->id;
+  active_lock.unlock();
+  all_lock.unlock();
+  return ret;
+}

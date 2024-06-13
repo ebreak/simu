@@ -5,6 +5,7 @@
 #include <set>
 #include <vector>
 #include <mutex>
+#include <mocutils/byte.h>
 
 struct object;
 #include "object.h"
@@ -24,6 +25,7 @@ public:
   u64 insert(object *obj);
   void activate(u64 id);
   void deactivate(u64 id);
+  moc::bytes serialize();
 };
 
 #endif

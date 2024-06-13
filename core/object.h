@@ -2,6 +2,7 @@
 #define __CORE_OBJECT_H
 
 #include <mutex>
+#include <mocutils/byte.h>
 
 #include "coordinate.h"
 
@@ -20,6 +21,7 @@ struct object {
   u64 spawn(object *obj);
   void awake(u64 id);
   void asleep(u64 id);
+  virtual moc::bytes serialize() = 0;
 };
 
 #endif

@@ -13,3 +13,10 @@ void human::move(coordinate delta) {
   this->position += delta;
   this->lock.unlock();
 }
+
+moc::bytes human::serialize() {
+  this->lock.lock();
+  moc::bytes ret(this, sizeof(human));
+  this->lock.unlock();
+  return ret;
+}

@@ -7,6 +7,7 @@ struct human: public object {
   human(universe *u, coordinate _position);
   void tick_action();
   void move(coordinate delta);
+  moc::bytes serialize();
 };
 
 
