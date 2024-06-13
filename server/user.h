@@ -3,6 +3,7 @@
 
 #include <mocutils/type.h>
 #include <pyrite/server.h>
+#include <telecom/user.h>
 
 extern std::vector<user> users;
 extern std::map<u64, i64> session_uid;
