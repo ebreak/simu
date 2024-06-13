@@ -1,6 +1,8 @@
 #ifndef __CORE_OBJECT_H
 #define __CORE_OBJECT_H
 
+#include <mutex>
+
 #include "coordinate.h"
 
 class universe;
@@ -11,6 +13,7 @@ struct object {
   i64 kind; // > 0 for renderable, <= 0 for unrenderable
   universe *u;
   coordinate position;
+  std::mutex lock;
   object(universe *_u, i64 _kind, coordinate _position)
     :u(_u), kind(_kind), position(_position) {}
   virtual void tick_action() = 0;

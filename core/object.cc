@@ -2,7 +2,9 @@
 
 u64 object::spawn(object *obj) {
   this->u->all.push_back(obj);
-  return this->u->all.size()-1;
+  u64 id = this->u->all.size()-1;
+  obj->id = id;
+  return id;
 }
 
 void object::awake(u64 id) {
