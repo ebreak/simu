@@ -6,11 +6,18 @@
 
 #include "gl_util.h"
 
-void process_key(human *me) {
-
+void process_key(GLFWwindow *window, human *me) {
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    me->move(coordinate(0, 1.0/32));
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    me->move(coordinate(-1.0/32, 0));
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    me->move(coordinate(0, -1.0/32));
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    me->move(coordinate(1.0/32, 0));
 }
 
-void render(universe *u, GLFWwindow *window) {
+void render(GLFWwindow *window, universe *u) {
   glClearColor(0, 0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
@@ -26,10 +33,10 @@ void ui_mainloop(universe *u, human *me) {
 
   moc::clock start;
   while (!glfwWindowShouldClose(window)) {
-    process_key(me);
-    render(u, window);
+    process_key(window, me);
+    render(window, u);
     glfwPollEvents();
-    start.tick(100);
+    start.tick(10);
   }
 
   glfwTerminate();
