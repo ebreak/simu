@@ -3,6 +3,10 @@
 
 #include <vector>
 #include <object/human.h>
+#include <universe.h>
+#include <pyrite/client.h>
+
+extern prt::client *c;
 
 void init_client();
 std::vector<human*> get_all_human();

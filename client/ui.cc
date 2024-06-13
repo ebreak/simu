@@ -5,8 +5,9 @@
 #include <cstdio>
 
 #include "gl_util.h"
+#include "game.h"
 
-void process_key(GLFWwindow *window, human *me) {
+void process_key(GLFWwindow *window) {
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     me->move(coordinate(0, 1.0/32));
   if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -17,7 +18,7 @@ void process_key(GLFWwindow *window, human *me) {
     me->move(coordinate(1.0/32, 0));
 }
 
-void render(GLFWwindow *window, universe *u) {
+void render(GLFWwindow *window) {
   glClearColor(0, 0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
@@ -26,7 +27,7 @@ void render(GLFWwindow *window, universe *u) {
   glfwSwapBuffers(window);
 }
 
-void ui_mainloop(universe *u, human *me) {
+void ui_mainloop() {
   if (!glfwInit()) exit(-1);
   GLFWwindow *window = glfwCreateWindow(1024, 1024, "SIMU", NULL, NULL);
   glfwMakeContextCurrent(window);

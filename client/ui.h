@@ -4,6 +4,6 @@
 #include <universe.h>
 #include <object/human.h>
 
-void ui_mainloop(universe *u, human *me);
+void ui_mainloop();
 
 #endif

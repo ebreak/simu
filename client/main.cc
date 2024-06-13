@@ -7,15 +7,11 @@
 
 #include "ui.h"
 #include "net.h"
+#include "game.h"
 
 int main() {
   init_client();
-  return 0;
-  universe u;
-  auto me = new human(&u, coordinate(0, 0));
-  auto id = u.insert(me);
-  u.activate(id);
-  std::thread ui_thread(ui_mainloop, &u, me);
-  u.start(100, false);
+  std::thread ui_thread(ui_mainloop);
+  start();
   return 0;
 }
