@@ -3,17 +3,25 @@
 #include <telecom/user.h>
 #include <object/human.h>
 #include <map>
+#include <pyrite/server.h>
 
 #include "game.h"
+#include "net.h"
 
 u64 next_session;
 std::vector<user> users;
 std::map<u64, i64> session_uid;
 std::map<i64, u64> uid_oid;
+std::map<i64, sockaddr_in> uid_addr;
 
 void init_user() {
   users.push_back({0, "nahida", "akademiya", nullptr});
   moc::log("user init ok");
+}
+
+void tell_all(std::string identifier, prt::bytes data) {
+  for (auto kv: uid_addr)
+    s->tell(kv.second, identifier, data);
 }
 
 prt::bytes _login(sockaddr_in client, prt::bytes data) {
@@ -35,6 +43,7 @@ prt::bytes _login(sockaddr_in client, prt::bytes data) {
 
   session = next_session++;
   session_uid[session] = uid;
+  uid_addr[uid] = client;
 
   if (uid_oid.count(uid))
     return prt::bytes(&session, sizeof(session));
