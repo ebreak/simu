@@ -7,6 +7,7 @@
 #include "coordinate.h"
 
 struct human_move: basic {
+  u64 id;
   coordinate delta;
 };
 

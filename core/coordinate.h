@@ -7,8 +7,10 @@ struct coordinate {
   double x, y;
 #ifdef SIMU_3D
   double z;
+  coordinate(): x(0), y(0), z(0) {}
   coordinate(double _x, double _y, double _z): x(_x), y(_y), z(_z) {}
 #else
+  coordinate(): x(0), y(0) {}
   coordinate(double _x, double _y): x(_x), y(_y) {}
 #endif
   double distance_to(const coordinate &other);
