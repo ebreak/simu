@@ -2,6 +2,7 @@
 #define __CORE_OBJECT_HUMAN_H
 
 #include "object.h"
+#include "kind.h"
 
 struct human: public object {
   human(universe *u, coordinate _position);

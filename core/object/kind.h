@@ -2,7 +2,7 @@
 #define __CORE_OBJECT_KIND_H
 
 enum object_kind {
-  obj_human,
+  obj_human = 1,
 };
 
 #endif

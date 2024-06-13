@@ -31,9 +31,8 @@ prt::bytes _human_move(prt::bytes data) {
   coordinate delta;
   data.range(8, data.size()).to_mem(&delta, sizeof(delta));
 
-  auto ho = u->operator[](oid);
-  human *h = (human*) ho;
+  auto ho = const_cast<object*>(u->operator[](oid));
+  human *h = static_cast<human*>(ho);
   h->move(delta);
-
   return PRT_NORESP;
 }

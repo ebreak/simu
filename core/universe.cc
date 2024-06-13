@@ -2,6 +2,8 @@
 
 #include <mocutils/log.h>
 #include <mocutils/clock.h>
+#include <object/kind.h>
+#include <object/human.h>
 
 universe::universe() {
   moc::log("initializing the universe...");
@@ -12,9 +14,18 @@ universe::universe(moc::bytes &raw) {
   int obj_num = raw.next_int32();
   this->all.reserve(obj_num);
   while (obj_num--) {
+    int kind = raw.next_int32();
     int obj_len = raw.next_int32();
-    this->all.push_back(object::unserialize(raw.range(raw.ptr, raw.ptr+obj_len)));
+    object *obj = nullptr;
+    switch (kind) {
+    case obj_human:
+      obj = (human*) malloc(sizeof(human));
+      raw.range(raw.ptr, raw.ptr+obj_len).to_mem(obj, sizeof(human));
+      break;
+    }
+    obj->u = this;
     raw.ptr += obj_len;
+    this->all.push_back(obj);
   }
   
   int active_num = raw.next_int32();
@@ -95,6 +106,7 @@ moc::bytes universe::serialize() {
   // serialize 'all'
   ret += (i32) all.size();
   for (auto obj: all) {
+    ret += (i32) obj->kind;
     auto serial = obj->serialize();
     ret += (i32) serial.size();
     ret += serial;

@@ -18,9 +18,10 @@ void process_key(GLFWwindow *window) {
     delta = coordinate(0, -1.0/32);
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     delta = coordinate(1.0/32, 0);
+  if (delta == coordinate()) return;
   prt::bytes data(&session, sizeof(session));
   data += prt::bytes(&delta, sizeof(coordinate));
-  c->tell("human-move", data);;
+  c->tell("human-move", data);
 }
 
 void render(GLFWwindow *window) {

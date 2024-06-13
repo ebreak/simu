@@ -30,4 +30,5 @@ prt::bytes _human_move(sockaddr_in client, prt::bytes data) {
   prt::bytes broadcast(&oid, sizeof(oid));
   broadcast += data.range(8, data.size());
   tell_all("human-move", broadcast);
+  return PRT_NULL_PKG;
 }
