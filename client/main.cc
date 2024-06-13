@@ -9,10 +9,10 @@
 
 int main() {
   universe u;
-  auto id = u.insert(new human(&u, coordinate(0, 0)));
+  auto me = new human(&u, coordinate(0, 0));
+  auto id = u.insert(me);
   u.activate(id);
-  init_ui();
-  std::thread render_thread(render, &u);
+  std::thread ui_thread(ui_mainloop, &u, me);
   u.start(100, false);
   return 0;
 }
