@@ -6,13 +6,7 @@
 #include <object/human.h>
 #include <mocutils/clock.h>
 
-void draw_point(float x, float y) {
-  glPointSize(20.0f);
-  glBegin(GL_POINTS);
-  glColor3f(1, 0, 0);
-  glVertex2f(x, y);
-  glEnd();
-}
+#include "gl_util.h"
 
 void render(universe *u) {
   if (!glfwInit()) exit(-1);
@@ -24,7 +18,7 @@ void render(universe *u) {
     glClear(GL_COLOR_BUFFER_BIT);
     auto ro_data = u->ro_obj();
     for (auto obj: ro_data)
-      draw_point(obj->position.x, obj->position.y);
+      draw_point(obj->position.x, obj->position.y, 20.0f);
     glfwSwapBuffers(window);
     glfwPollEvents();
     start.tick(100);
