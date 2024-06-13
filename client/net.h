@@ -7,8 +7,8 @@
 #include <pyrite/client.h>
 
 extern prt::client *c;
+extern u64 session;
 
 void init_client();
-std::vector<human*> get_all_human();
 
 #endif

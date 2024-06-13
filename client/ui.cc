@@ -6,16 +6,21 @@
 
 #include "gl_util.h"
 #include "game.h"
+#include "net.h"
 
 void process_key(GLFWwindow *window) {
-  // if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-  //   me->move(coordinate(0, 1.0/32));
-  // if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-  //   me->move(coordinate(-1.0/32, 0));
-  // if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-  //   me->move(coordinate(0, -1.0/32));
-  // if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-  //   me->move(coordinate(1.0/32, 0));
+  coordinate delta;
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    delta = coordinate(0, 1.0/32);
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    delta = coordinate(-1.0/32, 0);
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    delta = coordinate(0, -1.0/32);
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    delta = coordinate(1.0/32, 0);
+  prt::bytes data(&session, sizeof(session));
+  data += prt::bytes(&delta, sizeof(coordinate));
+  c->tell("human-move", data);;
 }
 
 void render(GLFWwindow *window) {

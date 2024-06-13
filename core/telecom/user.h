@@ -8,7 +8,6 @@
 struct user {
   u64 id;
   std::string username, password;
-  human *me;
 };
 
 #endif

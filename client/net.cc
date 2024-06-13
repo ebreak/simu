@@ -1,7 +1,6 @@
 #include "net.h"
 
 #include <pyrite/client.h>
-#include <telecom/human_move.h>
 #include <object/human.h>
 
 prt::client *c;
@@ -24,12 +23,15 @@ void init_client() {
   moc::logf("login success. session: %llx\n", session);
 }
 
-std::vector<human*> get_all_human() {
-  auto resp = c->promise("get-all-human", PRT_NULL_PKG);
-}
-
 prt::bytes _human_move(prt::bytes data) {
-  human_move info;
-  data.to_mem(&info, sizeof(info));
+  u64 oid;
+  data.range(0, 8).to_mem(&oid, sizeof(oid));
+  coordinate delta;
+  data.range(8, data.size()).to_mem(&delta, sizeof(delta));
+
+  auto ho = u->operator[](oid);
+  human *h = (human*) ho;
+  h->move(delta);
+
   return PRT_NORESP;
 }
