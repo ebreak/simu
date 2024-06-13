@@ -13,11 +13,11 @@ universe::~universe() {
     delete v;
 }
 
-void universe::start(i64 period) {
+void universe::start(i64 period, bool show_status = false) {
   moc::clock c;
   i64 used = 0;
   while (true) {
-    if (tick % 10 == 0)
+    if (tick % 10 == 0 && show_status)
       printf("\rCPU: %.2llf%%, obj: %d", (double) used / period, all.size());
 
     all_lock.lock();
