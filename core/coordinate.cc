@@ -20,4 +20,5 @@ void coordinate::operator+=(const coordinate &other) {
   this->y += other.y;
 #ifdef SIMU_3D
   this->z += other.z;
+#endif
 }

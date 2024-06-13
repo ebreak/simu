@@ -2,14 +2,20 @@
 
 #include <glfw/glfw3.h>
 #include <mocutils/clock.h>
+#include <cstdio>
 
 #include "gl_util.h"
 
-void render(universe *u) {
+void init_ui() {
   if (!glfwInit()) exit(-1);
+}
+
+void render(universe *u) {
   GLFWwindow *window = glfwCreateWindow(1024, 1024, "SIMU", NULL, NULL);
   glfwMakeContextCurrent(window);
   moc::clock start;
+  printf("111\n");
+  printf("%p\n", window);
   while (!glfwWindowShouldClose(window)) {
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);

@@ -3,6 +3,7 @@
 
 #include <universe.h>
 
+void init_ui();
 void render(universe *u);
 
 #endif

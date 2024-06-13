@@ -11,6 +11,7 @@ int main() {
   universe u;
   auto id = u.insert(new human(&u, coordinate(0, 0)));
   u.activate(id);
+  init_ui();
   std::thread render_thread(render, &u);
   u.start(100, false);
   return 0;
