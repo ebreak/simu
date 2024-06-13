@@ -18,7 +18,7 @@ public:
   u64 tick;
   universe();
   ~universe();
-  void start(i64 period);
+  void start(i64 period, bool show_status);
   const object *operator[](u64 id);
   std::vector<const object*> ro_obj();
   u64 insert(object *obj);

@@ -4,7 +4,7 @@
 #include <mocutils/clock.h>
 
 universe::universe() {
-  moc::log("initializing the universe");
+  moc::log("initializing the universe...");
   tick = 0;
 }
 
@@ -13,7 +13,8 @@ universe::~universe() {
     delete v;
 }
 
-void universe::start(i64 period, bool show_status = false) {
+void universe::start(i64 period, bool show_status) {
+  moc::log("starting the universe...");
   moc::clock c;
   i64 used = 0;
   while (true) {
