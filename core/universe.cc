@@ -21,13 +21,9 @@ universe::universe(moc::bytes &raw): tick(0) {
     object *obj = nullptr;
     switch (kind) {
     case obj_human:
-      obj = new human(this);
-      human tmp(this);
-      raw.range(raw.ptr, raw.ptr+obj_len).to_mem(&tmp, sizeof(human));
-      *obj = tmp;
+      obj = human::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
       break;
     }
-    obj->u = this;
     raw.ptr += obj_len;
     this->all.push_back(obj);
   }

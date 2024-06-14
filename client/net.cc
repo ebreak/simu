@@ -8,11 +8,13 @@
 prt::client *c;
 u64 session;
 
+prt::bytes _update_object(prt::bytes data);
 prt::bytes _human_move(prt::bytes data);
 
 void init_client(std::string username, std::string password) {
   c = new prt::client("127.0.0.1", 8082);
   c->set_handler("human-move", _human_move);
+  c->set_handler("update-object", _update_object);
   c->async();
 
   prt::bytes login_data;
@@ -23,6 +25,10 @@ void init_client(std::string username, std::string password) {
   if (session == -1)
     moc::panic("invalid username or password");
   moc::logf("login success. session: %llx\n", session);
+}
+
+prt::bytes _update_object(prt::bytes data) {
+
 }
 
 prt::bytes _human_move(prt::bytes data) {
