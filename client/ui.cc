@@ -3,12 +3,23 @@
 #include <glfw/glfw3.h>
 #include <mocutils/clock.h>
 #include <cstdio>
+#include <config.h>
 
 #include "gl_util.h"
 #include "game.h"
 #include "net.h"
 
 vector my_velocity;
+
+bool in_display_range(coordinate point) {
+  if (point.x < display_start.x) return false;
+  if (point.y < display_start.y) return false;
+  if (point.x >= display_start.x+display_range_x)
+    return false;
+  if (point.y >= display_start.y+display_range_y)
+    return false;
+  return true;
+}
 
 void key_callback(
   GLFWwindow *window, int key, 
@@ -48,8 +59,9 @@ void render(GLFWwindow *window) {
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
   for (auto obj: ro_data) {
+    if (!in_display_range(obj->position)) continue;
     glColor3f(1.0f, 215.0f/225, 0.0f);
-    draw_circle(obj->position.x / 4, obj->position.y / 4, 1.0/32);
+    draw_circle(obj->position.x, obj->position.y, 1.0/32);
   }
   glfwSwapBuffers(window);
 }
@@ -59,9 +71,19 @@ void ui_mainloop() {
 
   // glfw init
   if (!glfwInit()) exit(-1);
-  GLFWwindow *window = glfwCreateWindow(1024, 1024, "SIMU", NULL, NULL);
+  auto monitor = glfwGetPrimaryMonitor();
+  auto mode = glfwGetVideoMode(monitor);
+  u64 display_width, display_height;
+  display_width = mode->width;
+  display_height = mode->height;
+  GLFWwindow *window = glfwCreateWindow(display_width, display_height, "SIMU", monitor, NULL);
   glfwMakeContextCurrent(window);
   glfwSetKeyCallback(window, key_callback);
+
+  // render range init
+  display_start = init_display_start;
+  display_range_x = init_display_scale;
+  display_range_y = display_range_x*display_height/display_width;
 
   moc::clock start;
   while (!glfwWindowShouldClose(window)) {
