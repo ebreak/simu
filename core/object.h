@@ -17,6 +17,8 @@ struct object {
   object(universe *_u, i64 _kind, coordinate _position)
     :u(_u), kind(_kind), position(_position) {}
   virtual void tick_action() = 0;
+  object *visit(u64 id);
+  std::vector<u64> find(i64 kind);
   u64 spawn(object *obj);
   void awake(u64 id);
   void asleep(u64 id);
