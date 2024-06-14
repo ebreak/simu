@@ -5,6 +5,10 @@
 
 struct polar {
   double d, angle;
+  void operator+=(polar other) {
+    this->d += other.d;
+    this->angle += other.angle;
+  }
 };
 
 struct coordinate {
