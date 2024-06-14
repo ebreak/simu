@@ -11,13 +11,21 @@ struct vector: coordinate {
   vector(): x(0), y(0), z(0) {}
   vector(double _x, double _y, double _z): x(_x), y(_y), z(_z) {}
 #else
-  vector(): x(0), y(0) {}
-  vector(double _x, double _y): x(_x), y(_y) {}
+  vector(): coordinate(0, 0) {}
+  vector(double _x, double _y): coordinate(_x, _y) {}
 #endif
 
   vector(polar p) {
     this->x = p.d * cos(p.angle);
     this->y = p.d * sin(p.angle);
+  }
+
+  void operator=(coordinate other) {
+    this->x = other.x;
+    this->y = other.y;
+#ifdef SIMU_3D
+    ret.z = other.z;
+#endif
   }
 
   vector operator/(double d) {
