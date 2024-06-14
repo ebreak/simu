@@ -20,7 +20,7 @@ public:
   universe();
   universe(moc::bytes &raw);
   ~universe();
-  void start(i64 period, bool show_status);
+  void start();
   const object *operator[](u64 id);
   std::vector<const object*> ro_obj();
   u64 insert(object *obj);

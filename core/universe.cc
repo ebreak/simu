@@ -5,6 +5,8 @@
 #include <object/kind.h>
 #include <object/human.h>
 
+#include "config.h"
+
 universe::universe() {
   moc::log("initializing the universe...");
   tick = 0;
@@ -40,7 +42,7 @@ universe::~universe() {
     delete v;
 }
 
-void universe::start(i64 period, bool show_status) {
+void universe::start() {
   moc::clock c;
   i64 used = 0;
   while (true) {
@@ -52,7 +54,7 @@ void universe::start(i64 period, bool show_status) {
     all_lock.unlock();
 
     tick += 1;
-    used = c.tick(period);
+    used = c.tick(PLANCK_TIME);
   }
 }
 
