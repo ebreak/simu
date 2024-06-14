@@ -7,6 +7,7 @@
 
 struct human: public object {
   vector velocity;
+  human(universe *u): object(u, obj_human, coordinate()), velocity(vector()) {}
   human(universe *u, coordinate _position)
     :object(u, obj_human, _position), velocity(vector()) {}
   void tick_action();
