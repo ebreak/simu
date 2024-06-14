@@ -28,7 +28,21 @@ void init_client(std::string username, std::string password) {
 }
 
 prt::bytes _update_object(prt::bytes data) {
+  if (u == nullptr) return PRT_NORESP;
 
+  bool active;
+  data.to_mem(&active, sizeof(active));
+  data.ptr += sizeof(active);
+
+  int kind = data.next_int32();
+  object *obj = nullptr;
+
+  // append here to add obj impl
+  if (kind == obj_human)
+    obj = human::deserialize(u, data.range(data.ptr, data.size()));
+
+  u->update(obj->id, obj, active);
+  return PRT_NORESP;
 }
 
 prt::bytes _human_move(prt::bytes data) {

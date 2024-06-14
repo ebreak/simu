@@ -48,7 +48,11 @@ prt::bytes _login(sockaddr_in client, prt::bytes data) {
 
   if (uid_oid.count(uid))
     return prt::bytes(&session, sizeof(session));
-  uid_oid[uid] = u->insert(new human(u, coordinate()));
+
+  // human of user not exist
+  auto h = new human(u, coordinate());
+  uid_oid[uid] = u->insert(h);
   u->activate(uid_oid[uid]);
+  update_object(h, true);
   return prt::bytes(&session, sizeof(session));
 }

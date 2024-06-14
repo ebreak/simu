@@ -16,3 +16,10 @@ void init_server() {
   s->async();
   moc::log("server init ok");
 }
+
+void update_object(object *obj, bool active) {
+  prt::bytes data(&active, sizeof(active));
+  data += (i32) obj->kind;
+  data += obj->serialize();
+  tell_all("update-object", data);
+}
