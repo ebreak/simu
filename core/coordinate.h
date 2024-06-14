@@ -3,6 +3,10 @@
 
 #include <mocutils/type.h>
 
+struct polar {
+  double d, angle;
+};
+
 struct coordinate {
   double x, y;
 #ifdef SIMU_3D
@@ -14,6 +18,7 @@ struct coordinate {
   coordinate(double _x, double _y): x(_x), y(_y) {}
 #endif
   double distance_to(const coordinate &other);
+  polar polar_to(const coordinate &other);
   void operator+=(const coordinate &other);
   void operator-=(const coordinate &other);
   bool operator==(const coordinate &other);

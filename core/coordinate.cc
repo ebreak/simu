@@ -15,6 +15,13 @@ double coordinate::distance_to(const coordinate &other) {
   return sqrt(sum);
 }
 
+polar coordinate::polar_to(const coordinate &other) {
+  return polar{
+    d: this->distance_to(other), 
+    angle: atan((other.y-this->y)/(other.x-this->x)),
+  };
+}
+
 void coordinate::operator+=(const coordinate &other) {
   this->x += other.x;
   this->y += other.y;
