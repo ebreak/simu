@@ -19,11 +19,11 @@ universe::universe(moc::bytes &raw): tick(0) {
     int kind = raw.next_int32();
     int obj_len = raw.next_int32();
     object *obj = nullptr;
-    switch (kind) {
-    case obj_human:
+
+    // append here to add obj impl
+    if (kind == obj_human)
       obj = human::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
-      break;
-    }
+
     raw.ptr += obj_len;
     this->all.push_back(obj);
   }
