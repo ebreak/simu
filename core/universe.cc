@@ -10,7 +10,7 @@ universe::universe() {
   tick = 0;
 }
 
-universe::universe(moc::bytes &raw) {
+universe::universe(moc::bytes &raw): tick(0) {
   int obj_num = raw.next_int32();
   this->all.reserve(obj_num);
   while (obj_num--) {
@@ -19,8 +19,10 @@ universe::universe(moc::bytes &raw) {
     object *obj = nullptr;
     switch (kind) {
     case obj_human:
-      obj = (human*) malloc(sizeof(human));
-      raw.range(raw.ptr, raw.ptr+obj_len).to_mem(obj, sizeof(human));
+      obj = new human(this);
+      human tmp(this);
+      raw.range(raw.ptr, raw.ptr+obj_len).to_mem(&tmp, sizeof(human));
+      *obj = tmp;
       break;
     }
     obj->u = this;
@@ -39,13 +41,9 @@ universe::~universe() {
 }
 
 void universe::start(i64 period, bool show_status) {
-  moc::log("starting the universe...");
   moc::clock c;
   i64 used = 0;
   while (true) {
-    if (tick % 10 == 0 && show_status)
-      printf("\rCPU: %.2llf%%, obj: %d", (double) used / period, all.size());
-
     all_lock.lock();
     active_lock.lock();
     for (auto v: active)
