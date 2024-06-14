@@ -17,7 +17,7 @@ class universe {
   std::mutex all_lock, active_lock;
 public:
   u64 tick;
-  universe();
+  universe(): tick(0) {}
   universe(moc::bytes &raw);
   ~universe();
   void start();

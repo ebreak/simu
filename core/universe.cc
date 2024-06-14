@@ -7,11 +7,6 @@
 
 #include "config.h"
 
-universe::universe() {
-  moc::log("initializing the universe...");
-  tick = 0;
-}
-
 universe::universe(moc::bytes &raw): tick(0) {
   int obj_num = raw.next_int32();
   this->all.reserve(obj_num);
