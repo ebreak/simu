@@ -87,6 +87,7 @@ void universe::update(u64 id, object *obj, bool _active) {
     for (auto i = old_size; i <= id; ++i)
       all[i] = nullptr;
   }
+  if (all[id] != nullptr) delete all[id];
   all[id] = obj;
   all_lock.unlock();
   if (!_active) return;
