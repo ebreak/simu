@@ -12,7 +12,11 @@ struct human: public object {
   human(universe *u, coordinate _position)
     :object(u, obj_human, _position), velocity(vector()) {}
   void tick_action();
-  moc::bytes serialize();
+
+  moc::bytes serialize() {
+    moc::bytes ret(this, sizeof(human));
+    return ret;
+  }
 
   static object* deserialize(universe *u, moc::bytes data) {
     human tmp(u), *ret = new human(u);
