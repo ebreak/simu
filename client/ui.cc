@@ -8,27 +8,36 @@
 #include "game.h"
 #include "net.h"
 
+vector my_velocity;
+
 void key_callback(
   GLFWwindow *window, int key, 
   int scancode, int action, int mods
 ) {
-  vector velocity;
   prt::bytes data(&session, sizeof(session));
   switch (action) {
   case GLFW_PRESS:
     if (key == GLFW_KEY_W)
-      velocity = vector(0, 1.0/32);
+      my_velocity.y += 1.0/32;
     else if (key == GLFW_KEY_A)
-      velocity = vector(-1.0/32, 0);
+      my_velocity.x += -1.0/32;
     else if (key == GLFW_KEY_S)
-      velocity = vector(0, -1.0/32);
+      my_velocity.y += -1.0/32;
     else if (key == GLFW_KEY_D)
-      velocity = vector(1.0/32, 0);
-    data += prt::bytes(&velocity, sizeof(coordinate));
+      my_velocity.x += 1.0/32;
+    data += prt::bytes(&my_velocity, sizeof(vector));
     c->tell("human-move", data);
     break;
   case GLFW_RELEASE:
-    data += prt::bytes(&velocity, sizeof(coordinate));
+    if (key == GLFW_KEY_W)
+      my_velocity.y -= 1.0/32;
+    else if (key == GLFW_KEY_A)
+      my_velocity.x -= -1.0/32;
+    else if (key == GLFW_KEY_S)
+      my_velocity.y -= -1.0/32;
+    else if (key == GLFW_KEY_D)
+      my_velocity.x -= 1.0/32;
+    data += prt::bytes(&my_velocity, sizeof(vector));
     c->tell("human-move", data);
     break;
   }
