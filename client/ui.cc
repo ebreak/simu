@@ -48,7 +48,7 @@ void render(GLFWwindow *window) {
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
   for (auto obj: ro_data)
-    draw_point(obj->position.x, obj->position.y, 20.0f);
+    draw_point(obj->position.x / 4, obj->position.y / 4, 20.0f);
   glfwSwapBuffers(window);
 }
 

@@ -17,7 +17,7 @@ void start() {
   u->activate(u->insert(a));
 
   a = new astro(u, coordinate(1, 1));
-  a->velocity = coordinate(1.0/32, 0);
+  a->velocity = coordinate(1.0/128, -1.0/128);
   a->massive = 1;
   u->activate(u->insert(a));
 
