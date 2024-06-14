@@ -10,11 +10,11 @@ endif
 
 build: *.cc
 	g++ -o server.$(suffix) *.cc \
-		-I../core \
 		../core/*.cc \
 		../core/object/*.cc \
-		-IC:\include \
-		-LC:\lib \
+		-I../core \
+		-I../tool/include \
+		-L../tool/$(OS) \
 		-lpyrite -lmocutils -D$(OS) $(ws2_32)
 
 run: build

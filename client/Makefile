@@ -10,11 +10,9 @@ endif
 
 build: *.cc
 	g++ -o client.$(suffix) *.cc \
-		-I../core \
 		../core/*.cc \
 		../core/object/*.cc \
-		-IC:\include \
-		-LC:\lib \
+		-I../core \
 		-I../tool/include \
 		-L../tool/$(OS) \
 		-lpyrite -lmocutils -lglfw3 -lopengl32 -lgdi32 -D$(OS) $(ws2_32)
