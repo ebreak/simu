@@ -61,7 +61,7 @@ void render(GLFWwindow *window) {
   for (auto obj: ro_data) {
     if (!in_display_range(obj->position)) continue;
     glColor3f(1.0f, 215.0f/225, 0.0f);
-    draw_circle(obj->position.x, obj->position.y, 1.0/32);
+    draw_circle(obj->position.x, obj->position.y, 1.0/8);
   }
   glfwSwapBuffers(window);
 }
