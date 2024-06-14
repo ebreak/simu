@@ -24,6 +24,7 @@ public:
   const object *operator[](u64 id);
   std::vector<const object*> ro_obj();
   u64 insert(object *obj);
+  void update(u64 id, object *obj, bool _active);
   void activate(u64 id);
   void deactivate(u64 id);
   moc::bytes serialize();

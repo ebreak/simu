@@ -83,6 +83,22 @@ u64 universe::insert(object *obj) {
   return id;
 }
 
+void universe::update(u64 id, object *obj, bool _active) {
+  all_lock.lock();
+  if (all.size() <= id) {
+    auto old_size = all.size();
+    all.resize(id+1);
+    for (auto i = old_size; i <= id; ++i)
+      all[i] = nullptr;
+  }
+  all[id] = obj;
+  all_lock.unlock();
+  if (!_active) return;
+  active_lock.lock();
+  active.insert(obj);
+  active_lock.unlock();
+}
+
 void universe::activate(u64 id) {
   active_lock.lock();
   all_lock.lock();
