@@ -2,6 +2,7 @@
 
 #include <pyrite/client.h>
 #include <object/human.h>
+#include <object/astro.h>
 
 #include "game.h"
 
@@ -40,6 +41,8 @@ prt::bytes _update_object(prt::bytes data) {
   // append here to add obj impl
   if (kind == obj_human)
     obj = human::deserialize(u, data.range(data.ptr, data.size()));
+  else if (kind == obj_astro)
+    obj = astro::deserialize(u, data.range(data.ptr, data.size()));
 
   u->update(obj->id, obj, active);
   return PRT_NORESP;

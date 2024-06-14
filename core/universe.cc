@@ -4,6 +4,7 @@
 #include <mocutils/clock.h>
 #include <object/kind.h>
 #include <object/human.h>
+#include <object/astro.h>
 
 #include "config.h"
 
@@ -18,6 +19,8 @@ universe::universe(moc::bytes &raw): tick(0) {
     // append here to add obj impl
     if (kind == obj_human)
       obj = human::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
+    else if (kind == obj_astro)
+      obj = astro::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
 
     raw.ptr += obj_len;
     this->all.push_back(obj);

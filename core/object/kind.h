@@ -3,6 +3,7 @@
 
 #include <mocutils/type.h>
 
+// append here to add obj impl
 enum object_kind {
   obj_human = 1,
   obj_astro,

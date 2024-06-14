@@ -2,6 +2,7 @@
 
 #include <universe.h>
 #include <object/human.h>
+#include <object/astro.h>
 
 #include "user.h"
 
@@ -9,6 +10,17 @@ universe *u;
 
 void start() {
   u = new universe;
+
+  auto a = new astro(u);
+  a->massive = 1;
+  a->fixed = true;
+  u->activate(u->insert(a));
+
+  a = new astro(u, coordinate(1, 1));
+  a->velocity = coordinate(1.0/32, 0);
+  a->massive = 1;
+  u->activate(u->insert(a));
+
   u->start();
 }
 
