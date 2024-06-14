@@ -23,6 +23,14 @@ void coordinate::operator+=(const coordinate &other) {
 #endif
 }
 
+void coordinate::operator-=(const coordinate &other) {
+  this->x -= other.x;
+  this->y -= other.y;
+#ifdef SIMU_3D
+  this->z -= other.z;
+#endif
+}
+
 bool coordinate::operator==(const coordinate &other) {
   if (this->x != other.x) return false;
   if (this->y != other.y) return false;

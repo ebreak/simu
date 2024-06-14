@@ -15,6 +15,7 @@ struct coordinate {
 #endif
   double distance_to(const coordinate &other);
   void operator+=(const coordinate &other);
+  void operator-=(const coordinate &other);
   bool operator==(const coordinate &other);
 };
 
