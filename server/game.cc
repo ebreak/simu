@@ -25,7 +25,7 @@ prt::bytes _human_move(sockaddr_in client, prt::bytes data) {
   u64 oid = uid_oid[uid];
   auto ho = u->operator[](oid);
   human *h = (human*) ho;
-  h->move(delta);
+  h->velocity = delta;
 
   prt::bytes broadcast(&oid, sizeof(oid));
   broadcast += data.range(8, data.size());

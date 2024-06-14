@@ -33,6 +33,6 @@ prt::bytes _human_move(prt::bytes data) {
 
   auto ho = const_cast<object*>(u->operator[](oid));
   human *h = static_cast<human*>(ho);
-  h->move(delta);
+  h->velocity = delta;
   return PRT_NORESP;
 }
