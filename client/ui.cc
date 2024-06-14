@@ -47,8 +47,10 @@ void render(GLFWwindow *window) {
   glClearColor(0, 0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
-  for (auto obj: ro_data)
-    draw_point(obj->position.x / 4, obj->position.y / 4, 20.0f);
+  for (auto obj: ro_data) {
+    glColor3f(1.0f, 215.0f/225, 0.0f);
+    draw_circle(obj->position.x / 4, obj->position.y / 4, 1.0/32);
+  }
   glfwSwapBuffers(window);
 }
 

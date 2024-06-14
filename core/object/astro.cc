@@ -13,6 +13,7 @@ void astro::tick_action() {
     if (id == this->id) continue;
     auto other = (astro *) this->visit(id);
     double d = this->position.distance_to(other->position);
+    d = std::max(d, 1.0/2);
     double r = d * 32;
     double g = GRAVITY*(this->massive)*(other->massive)/r/r;
     double dx = other->position.x - this->position.x;
