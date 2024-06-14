@@ -10,7 +10,6 @@ struct human: public object {
   human(universe *u, coordinate _position)
     :object(u, obj_human, _position), velocity(vector()) {}
   void tick_action();
-  void move(coordinate delta);
   moc::bytes serialize();
 };
 
