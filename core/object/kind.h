@@ -5,6 +5,7 @@
 
 enum object_kind {
   obj_human = 1,
+  obj_astro,
 };
 
 #endif
