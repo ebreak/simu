@@ -26,6 +26,9 @@ universe::universe(moc::bytes &raw): tick(0) {
   int active_num = raw.next_int32();
   while (active_num--)
     this->active.insert(this->all[raw.next_int32()]);
+  
+  for (auto obj: this->all)
+    this->category[obj->kind].insert(obj->id);
 }
 
 universe::~universe() {
@@ -39,8 +42,10 @@ void universe::start() {
   while (true) {
     all_lock.lock();
     active_lock.lock();
+    category_lock.lock();
     for (auto v: active)
       v->tick_action();
+    category_lock.unlock();
     active_lock.unlock();
     all_lock.unlock();
 
@@ -67,8 +72,11 @@ std::vector<const object*> universe::ro_obj() {
 
 u64 universe::insert(object *obj) {
   all_lock.lock();
+  category_lock.lock();
   all.push_back(obj);
   u64 id = all.size()-1;
+  category[obj->kind].insert(id);
+  category_lock.unlock();
   all_lock.unlock();
   obj->id = id;
   return id;
@@ -82,9 +90,17 @@ void universe::update(u64 id, object *obj, bool _active) {
     for (auto i = old_size; i <= id; ++i)
       all[i] = nullptr;
   }
-  if (all[id] != nullptr) delete all[id];
+
+  category_lock.lock();
+  if (all[id] != nullptr) {
+    category.erase(id);
+    delete all[id];
+  }
+
   obj->id = id;
   all[id] = obj;
+  category[obj->kind].insert(id);
+  category_lock.unlock();
   all_lock.unlock();
   if (!_active) return;
   active_lock.lock();

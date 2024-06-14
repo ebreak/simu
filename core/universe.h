@@ -14,7 +14,8 @@ class universe {
   friend struct object;
   std::vector<object*> all;
   std::set<object*> active;
-  std::mutex all_lock, active_lock;
+  std::map<i64, std::set<u64>> category; // kind to set of oid
+  std::mutex all_lock, active_lock, category_lock;
 public:
   u64 tick;
   universe(): tick(0) {}
