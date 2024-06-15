@@ -2,9 +2,9 @@
 
 #include <mocutils/log.h>
 #include <mocutils/clock.h>
-#include <object/kind.h>
 #include <object/human.h>
 #include <object/astro.h>
+#include <object/deserialize_func.h>
 
 #include "config.h"
 
@@ -16,11 +16,9 @@ universe::universe(moc::bytes &raw): tick(0) {
     int obj_len = raw.next_int32();
     object *obj = nullptr;
 
-    // append here to add obj impl
-    if (kind == obj_human)
-      obj = human::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
-    else if (kind == obj_astro)
-      obj = astro::deserialize(this, raw.range(raw.ptr, raw.ptr+obj_len));
+    if (kind >= sizeof(deserialize_func)/sizeof(void*))
+      moc::panicf("invalid obj type: %d\n", kind);
+    obj = deserialize_func[kind](this, raw.range(raw.ptr, raw.ptr+obj_len));
 
     raw.ptr += obj_len;
     this->all.push_back(obj);

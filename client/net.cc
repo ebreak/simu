@@ -3,6 +3,7 @@
 #include <pyrite/client.h>
 #include <object/human.h>
 #include <object/astro.h>
+#include <object/deserialize_func.h>
 
 #include "game.h"
 
@@ -38,11 +39,9 @@ prt::bytes _update_object(prt::bytes data) {
   int kind = data.next_int32();
   object *obj = nullptr;
 
-  // append here to add obj impl
-  if (kind == obj_human)
-    obj = human::deserialize(u, data.range(data.ptr, data.size()));
-  else if (kind == obj_astro)
-    obj = astro::deserialize(u, data.range(data.ptr, data.size()));
+  if (kind >= sizeof(deserialize_func)/sizeof(void*))
+    moc::panicf("invalid obj type: %d\n", kind);
+  obj = deserialize_func[kind](u, data.range(data.ptr, data.size()));
 
   u->update(obj->id, obj, active);
   return PRT_NORESP;
