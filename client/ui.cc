@@ -89,7 +89,7 @@ void ui_mainloop() {
   while (!glfwWindowShouldClose(window)) {
     render(window);
     glfwPollEvents();
-    start.tick(10);
+    start.tick(1000 / mode->refreshRate);
   }
 
   glfwTerminate();
