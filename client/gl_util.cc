@@ -4,8 +4,8 @@
 #include <cmath>
 #include <coordinate.h>
 
-double display_range_x, display_range_y;
-coordinate display_start;
+double display_scale_x, display_scale_y;
+coordinate display_center;
 
 void draw_point(float x, float y) {
   glBegin(GL_POINTS);
