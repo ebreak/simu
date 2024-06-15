@@ -12,11 +12,9 @@
 vector my_velocity;
 
 bool in_display_range(coordinate point) {
-  if (point.x < display_start.x) return false;
-  if (point.y < display_start.y) return false;
-  if (point.x >= display_start.x+display_range_x)
+  if (abs(point.x-display_center.x) >= display_scale_x)
     return false;
-  if (point.y >= display_start.y+display_range_y)
+  if (abs(point.y-display_center.y) >= display_scale_y)
     return false;
   return true;
 }
@@ -81,9 +79,9 @@ void ui_mainloop() {
   glfwSetKeyCallback(window, key_callback);
 
   // render range init
-  display_start = init_display_start;
-  display_range_x = init_display_scale;
-  display_range_y = display_range_x*display_height/display_width;
+  display_center = init_display_center;
+  display_scale_x = init_display_scale;
+  display_scale_y = display_scale_x*display_height/display_width;
 
   moc::clock start;
   while (!glfwWindowShouldClose(window)) {
