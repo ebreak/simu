@@ -13,8 +13,8 @@ u64 session;
 prt::bytes _update_object(prt::bytes data);
 prt::bytes _human_move(prt::bytes data);
 
-void init_client(std::string username, std::string password) {
-  c = new prt::client("127.0.0.1", 8082);
+void init_client(std::string username, std::string password, const char *server, int port) {
+  c = new prt::client(server, port);
   c->set_handler("human-move", _human_move);
   c->set_handler("update-object", _update_object);
   c->async();

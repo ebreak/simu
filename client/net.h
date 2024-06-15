@@ -9,6 +9,6 @@
 extern prt::client *c;
 extern u64 session;
 
-void init_client(std::string username, std::string password);
+void init_client(std::string username, std::string password, const char *server, int port);
 
 #endif

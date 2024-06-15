@@ -11,7 +11,15 @@
 #include "game.h"
 
 int main(int argc, char **argv) {
-  init_client(std::string(argv[1]), std::string(argv[2]));
+  if (argc < 3)
+    moc::panicf("invalid argc: %d\n", argc);
+  int port = atoi(argv[2]);
+  char username[20], password[20];
+  printf("username> ");
+  scanf("%s", username);
+  printf("password> ");
+  scanf("%s", password);
+  init_client(std::string(username), std::string(password), argv[1], port);
   std::thread t(start);
   ui_mainloop();
   return 0;
