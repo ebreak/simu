@@ -76,6 +76,7 @@ void ui_mainloop() {
   display_height = mode->height;
   GLFWwindow *window = glfwCreateWindow(display_width, display_height, "SIMU", monitor, NULL);
   glfwMakeContextCurrent(window);
+  glfwFocusWindow(window);
   glfwSetKeyCallback(window, key_callback);
 
   // render range init
