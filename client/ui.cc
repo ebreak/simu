@@ -53,7 +53,7 @@ void key_callback(
 }
 
 void render(GLFWwindow *window) {
-  glClearColor(0, 0, 0, 0);
+  glClearColor(gl_color_rgb(0x333333), 0);
   glClear(GL_COLOR_BUFFER_BIT);
   auto ro_data = u->ro_obj();
   for (auto obj: ro_data) {
