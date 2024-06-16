@@ -18,7 +18,7 @@ build: *.cc
 		-lpyrite -lmocutils -lglfw3 -lopengl32 -lgdi32 -D$(OS) $(ws2_32)
 
 run: build
-	./client.$(suffix)
+	./client.$(suffix) 127.0.0.1 8082
 
 clean:
 	$(rm) *.$(suffix)
