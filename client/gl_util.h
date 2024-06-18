@@ -6,6 +6,8 @@
 extern double display_scale_x, display_scale_y;
 extern coordinate display_center;
 
+#define simuabs(x) ((x) >= 0 ? (x) : (-(x)))
+
 inline float to_gl_x(double _x) {
   return (float) (_x - display_center.x) / display_scale_x;
 }

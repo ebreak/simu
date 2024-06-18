@@ -12,9 +12,9 @@
 vector my_velocity;
 
 bool in_display_range(coordinate point) {
-  if (abs(point.x-display_center.x) >= display_scale_x)
+  if (simuabs(point.x-display_center.x) >= display_scale_x)
     return false;
-  if (abs(point.y-display_center.y) >= display_scale_y)
+  if (simuabs(point.y-display_center.y) >= display_scale_y)
     return false;
   return true;
 }
@@ -53,7 +53,7 @@ void key_callback(
 }
 
 void render_toolbar() {
-  
+
 }
 
 void render(GLFWwindow *window) {
