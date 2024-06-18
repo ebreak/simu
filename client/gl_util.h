@@ -20,6 +20,10 @@ inline float to_gl_y(double _y) {
   ((0x0000FF & rgb))/255.0
 
 void draw_point(float x, float y);
+void draw_point(double _x, double _y);
+void draw_line(float _x1, float _y1, float _x2, float _y2);
+void draw_line(double _x1, double _y1, double _x2, double _y2);
+void draw_bar(double _x1, double _y1, double _x2, double _y2, double _width);
 void draw_circle(double _x, double _y, double r);
 
 #endif

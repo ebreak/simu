@@ -52,6 +52,10 @@ void key_callback(
   }
 }
 
+void render_toolbar() {
+  
+}
+
 void render(GLFWwindow *window) {
   glClearColor(gl_color_rgb(0x333333), 0);
   glClear(GL_COLOR_BUFFER_BIT);
