@@ -5,6 +5,6 @@
 #include <object/human.h>
 #include <mocutils/channel.h>
 
-void ui_mainloop();
+void ui_main();
 
 #endif

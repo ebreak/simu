@@ -68,7 +68,7 @@ void render(GLFWwindow *window) {
   glfwSwapBuffers(window);
 }
 
-void ui_mainloop() {
+void ui_main() {
   while (!u) ;
 
   // glfw init

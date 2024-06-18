@@ -21,6 +21,6 @@ int main(int argc, char **argv) {
   scanf("%s", password);
   init_client(std::string(username), std::string(password), argv[1], port);
   std::thread t(start);
-  ui_mainloop();
+  ui_main();
   return 0;
 }
