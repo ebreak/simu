@@ -25,4 +25,19 @@ struct object {
   virtual moc::bytes serialize() = 0;
 };
 
+#define EXTEND_TRAITS(obj_impl) \
+obj_impl(universe *u): object(u, obj_##obj_impl, coordinate()), velocity(vector()) {} \
+moc::bytes serialize() { \
+  moc::bytes ret(this, sizeof(obj_impl)); \
+  return ret; \
+} \
+\
+static object* deserialize(universe *u, moc::bytes data) { \
+  obj_impl tmp(u), *ret = new obj_impl(u); \
+  data.to_mem(&tmp, sizeof(tmp)); \
+  *ret = tmp; \
+  ret->u = u; \
+  return ret; \
+}
+
 #endif
