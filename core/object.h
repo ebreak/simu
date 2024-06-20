@@ -5,6 +5,7 @@
 #include <mocutils/byte.h>
 
 #include "coordinate.h"
+#include "object/deserialize_func.h"
 
 class universe;
 #include "universe.h"
@@ -38,6 +39,11 @@ static object* deserialize(universe *u, moc::bytes data) { \
   *ret = tmp; \
   ret->u = u; \
   return ret; \
+} \
+
+#define REGIST_OBJ(obj_impl) \
+__attribute((constructor)) static void regist_##obj_impl() { \
+  deserialize_func[obj_##obj_impl] = obj_impl::deserialize; \
 }
 
 #endif

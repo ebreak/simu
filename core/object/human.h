@@ -13,6 +13,7 @@ struct human: public object {
     :object(u, obj_human, _position), velocity(vector()) {}
   void tick_action();
 };
+REGIST_OBJ(human);
 
 
 #endif
