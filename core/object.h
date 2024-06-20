@@ -27,7 +27,7 @@ struct object {
 };
 
 #define EXTEND_TRAITS(obj_impl) \
-obj_impl(universe *u): object(u, obj_##obj_impl, coordinate()), velocity(vector()) {} \
+obj_impl(universe *u): object(u, obj_##obj_impl, coordinate()) {} \
 moc::bytes serialize() { \
   moc::bytes ret(this, sizeof(obj_impl)); \
   return ret; \
