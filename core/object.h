@@ -5,6 +5,7 @@
 #include <mocutils/byte.h>
 
 #include "coordinate.h"
+#include "object/deserialize_func.h"
 
 class universe;
 #include "universe.h"
@@ -24,5 +25,25 @@ struct object {
   void asleep(u64 id);
   virtual moc::bytes serialize() = 0;
 };
+
+#define EXTEND_TRAITS(obj_impl) \
+obj_impl(universe *u): object(u, obj_##obj_impl, coordinate()) {} \
+moc::bytes serialize() { \
+  moc::bytes ret(this, sizeof(obj_impl)); \
+  return ret; \
+} \
+\
+static object* deserialize(universe *u, moc::bytes data) { \
+  obj_impl tmp(u), *ret = new obj_impl(u); \
+  data.to_mem(&tmp, sizeof(tmp)); \
+  *ret = tmp; \
+  ret->u = u; \
+  return ret; \
+} \
+
+#define REGIST_OBJ(obj_impl) \
+__attribute((constructor)) static void regist_##obj_impl() { \
+  deserialize_func[obj_##obj_impl] = obj_impl::deserialize; \
+}
 
 #endif
