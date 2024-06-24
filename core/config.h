@@ -3,6 +3,7 @@
 
 #define PLANCK_TIME 10
 #define GRAVITY (1.0/2)
+#define MAX_OBJ_NUM 128
 
 #define init_display_center coordinate(0.0f, 0.0f)
 #define init_display_scale 16.0f
